@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Animations</title>
+    <style>
+      :root {
+        --overlay-color-1: #666;
+        --overlay-color-2: #ccc;
+        background-color: #f5f5f5;
+      }
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 500px;
+        width: 90%;
+        aspect-ratio: 1 / 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+      }
+
+      /* 一つ目のトランジション */
+      .transition-1 {
+        /* アニメーションの開始時間 */
+        --delay: 0.2s;
+
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          animation: slideIn 1s cubic-bezier(0.87, 0.05, 0.02, 0.97) both,
+            slideOut 1s cubic-bezier(0.87, 0.05, 0.02, 0.97) forwards;
+        }
+        &::before {
+          background-color: var(--overlay-color-2);
+          animation-delay: calc(0s + var(--delay, 0s)),
+            calc(1.4s + var(--delay, 0s));
+        }
+        &::after {
+          background-color: var(--overlay-color-1);
+          animation-delay: calc(0.2s + var(--delay, 0s)),
+            calc(1.2s + var(--delay, 0s));
+        }
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(-101%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+      @keyframes slideOut {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(101%);
+        }
+      }
+
+      /* 二つ目のトランジション */
+      .transition-2 {
+        /* アニメーションの開始時間 */
+        --delay: 2.4s;
+        /* 斜めする具合 */
+        --skew-x: 100%;
+
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          animation: maskIn 1s cubic-bezier(0.87, 0.05, 0.02, 0.97) both,
+            maskOut 1s cubic-bezier(0.87, 0.05, 0.02, 0.97) forwards;
+        }
+        &::before {
+          background-color: var(--overlay-color-2);
+          animation-delay: calc(0s + var(--delay, 0s)),
+            calc(1.4s + var(--delay, 0s));
+        }
+        &::after {
+          background-color: var(--overlay-color-1);
+          animation-delay: calc(0.2s + var(--delay, 0s)),
+            calc(1.2s + var(--delay, 0s));
+        }
+      }
+      @keyframes maskIn {
+        from {
+          clip-path: polygon(
+            0 0,
+            0 0,
+            calc(var(--skew-x, 0) * -1) 100%,
+            calc(var(--skew-x, 0) * -1) 100%
+          );
+        }
+        to {
+          clip-path: polygon(
+            0 0,
+            calc(100% + var(--skew-x, 0)) 0,
+            100% 100%,
+            calc(var(--skew-x, 0) * -1) 100%
+          );
+        }
+      }
+      @keyframes maskOut {
+        from {
+          clip-path: polygon(
+            0 0,
+            calc(100% + var(--skew-x, 0)) 0,
+            100% 100%,
+            calc(var(--skew-x, 0) * -1) 100%
+          );
+        }
+        to {
+          clip-path: polygon(
+            calc(100% + var(--skew-x, 0)) 0,
+            calc(100% + var(--skew-x, 0)) 0,
+            100% 100%,
+            100% 100%
+          );
+        }
+      }
+
+      /* 三つ目のトランジション */
+      .transition-3 {
+        /* アニメーションの開始時間 */
+        --delay: 4.6s;
+        /* 先端の尖り具合 */
+        --sharpness: 40%;
+
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          animation: arrowIn 1s cubic-bezier(0.87, 0.05, 0.02, 0.97) both,
+            arrowOut 1s cubic-bezier(0.87, 0.05, 0.02, 0.97) forwards;
+        }
+        &::before {
+          background-color: var(--overlay-color-2);
+          animation-delay: calc(0s + var(--delay, 0s)),
+            calc(1.4s + var(--delay, 0s));
+        }
+        &::after {
+          background-color: var(--overlay-color-1);
+          animation-delay: calc(0.2s + var(--delay, 0s)),
+            calc(1.2s + var(--delay, 0s));
+        }
+      }
+      @keyframes arrowIn {
+        from {
+          clip-path: polygon(
+            calc(var(--sharpness) * -1) 0,
+            calc(var(--sharpness) * -1) 0,
+            0 50%,
+            calc(var(--sharpness) * -1) 100%,
+            calc(var(--sharpness) * -1) 100%,
+            0 50%
+          );
+        }
+        to {
+          clip-path: polygon(
+            calc(var(--sharpness) * -1) 0,
+            100% 0,
+            calc(100% + var(--sharpness)) 50%,
+            100% 100%,
+            calc(var(--sharpness) * -1) 100%,
+            0 50%
+          );
+        }
+      }
+      @keyframes arrowOut {
+        from {
+          clip-path: polygon(
+            calc(var(--sharpness) * -1) 0,
+            100% 0,
+            calc(100% + var(--sharpness)) 50%,
+            100% 100%,
+            calc(var(--sharpness) * -1) 100%,
+            0 50%
+          );
+        }
+        to {
+          clip-path: polygon(
+            100% 0,
+            100% 0,
+            calc(100% + var(--sharpness)) 50%,
+            100% 100%,
+            100% 100%,
+            calc(100% + var(--sharpness)) 50%
+          );
+        }
+      }
+
+      /* 四つ目のトランジション */
+      .transition-4 {
+        /* アニメーションの開始時間 */
+        --delay: 6.8s;
+
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+      }
+      .transition-4__block {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          animation: slideIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) both,
+            slideOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) forwards;
+        }
+        &::before {
+          background-color: var(--overlay-color-2);
+          animation-delay: calc(0s + var(--d, 0s) + var(--delay, 0s)),
+            calc(1.6s + var(--d, 0s) + var(--delay, 0s));
+        }
+        &::after {
+          background-color: var(--overlay-color-1);
+          animation-delay: calc(0.3s + var(--d, 0s) + var(--delay, 0s)),
+            calc(1.3s + var(--d, 0s) + var(--delay, 0s));
+        }
+
+        &:nth-child(1) {
+          --d: 0.1s;
+        }
+        &:nth-child(2) {
+          --d: 0.3s;
+        }
+        &:nth-child(3) {
+          --d: 0s;
+        }
+        &:nth-child(4) {
+          --d: 0.4s;
+        }
+        &:nth-child(5) {
+          --d: 0.2s;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 一つ目のトランジション -->
+      <div class="transition-1"></div>
+
+      <!-- 二つ目のトランジション -->
+      <div class="transition-2"></div>
+
+      <!-- 三つ目のトランジション -->
+      <div class="transition-3"></div>
+
+      <!-- 四つ目のトランジション -->
+      <div class="transition-4">
+        <div class="transition-4__block"></div>
+        <div class="transition-4__block"></div>
+        <div class="transition-4__block"></div>
+        <div class="transition-4__block"></div>
+        <div class="transition-4__block"></div>
+      </div>
+    </div>
+  </body>
+</html>

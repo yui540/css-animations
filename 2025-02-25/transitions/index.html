@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CSS Animations</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap");
+
       :root {
         --overlay-color-1: #666;
         --overlay-color-2: #ccc;
@@ -19,6 +21,28 @@
         aspect-ratio: 1 / 1;
         background-color: #fff;
         transform: translate(-50%, -50%);
+      }
+      .title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: grid;
+        row-gap: 8px;
+        justify-items: start;
+        align-content: center;
+
+        span {
+          display: inline-block;
+          font-family: "M PLUS 1", serif;
+          font-size: 36px;
+          font-weight: 300;
+          line-height: 1.2;
+          white-space: nowrap;
+          color: #fff;
+          padding: 4px 16px 6px;
+          background-color: #000;
+        }
       }
 
       /* 一つ目のトランジション */
@@ -279,6 +303,11 @@
         <div class="transition-4__block"></div>
         <div class="transition-4__block"></div>
         <div class="transition-4__block"></div>
+      </div>
+
+      <div class="title">
+        <span>自分がよく使う</span>
+        <span>CSSアニメーション</span>
       </div>
     </div>
   </body>

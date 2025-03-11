@@ -1,0 +1,36 @@
+<svg width="35" height="35" viewBox="0 0 35 35" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .circle {
+        fill: #bbb;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: fadeInOut 1.4s ease-out both infinite;
+      }
+      .circle:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .circle:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+
+      @keyframes fadeInOut {
+        from {
+          opacity: 1;
+          transform: scale(0);
+        }
+        to {
+          opacity: 0;
+          transform: scale(1);
+        }
+      }
+    </style>
+    <symbol id="circle">
+      <circle cx="17.5" cy="17.5" r="17.5" />
+    </symbol>
+  </defs>
+  <g>
+    <use class="circle" href="#circle" />
+    <use class="circle" href="#circle" />
+  </g>
+</svg>

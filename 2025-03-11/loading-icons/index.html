@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Animations</title>
+    <style>
+      :root {
+        background-color: #f5f5f5;
+      }
+      .container {
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 500px;
+        aspect-ratio: 1 / 0.7;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        display: grid;
+        place-content: center;
+
+        @media (max-width: 500px) {
+          transform: translate(-50%, -50%) scale(0.64);
+        }
+      }
+      .inner {
+        display: grid;
+        gap: 25px;
+        grid-template-areas:
+          "area1 area1 area2"
+          "area3 area4 area5";
+        grid-template-columns: repeat(3, 132px);
+        grid-template-rows: repeat(2, 132px);
+      }
+      .panel {
+        box-sizing: border-box;
+        position: relative;
+        display: grid;
+        place-content: center;
+        position: relative;
+        background-color: #f1f1f1;
+        border-radius: 18px;
+        overflow: hidden;
+
+        &:nth-child(1) {
+          grid-area: area1;
+
+          img {
+            width: 220px;
+            transform: translateY(3%);
+          }
+        }
+        &:nth-child(2) {
+          grid-area: area2;
+
+          img {
+            width: 90px;
+          }
+        }
+        &:nth-child(3) {
+          grid-area: area3;
+
+          img {
+            width: 70px;
+          }
+        }
+        &:nth-child(4) {
+          grid-area: area4;
+
+          img {
+            width: 80px;
+          }
+        }
+        &:nth-child(5) {
+          grid-area: area5;
+
+          img {
+            width: 90px;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="inner">
+        <div class="panel">
+          <img src="./loading-1.svg" alt="" />
+        </div>
+        <div class="panel">
+          <img src="./loading-2.svg" alt="" />
+        </div>
+        <div class="panel">
+          <img src="./loading-3.svg" alt="" />
+        </div>
+        <div class="panel">
+          <img src="./loading-4.svg" alt="" />
+        </div>
+        <div class="panel">
+          <img src="./loading-5.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>飛び出すCSSアニメーション</title>
+    <style>
+      .container {
+        display: grid;
+        place-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #36a7f6;
+        transform: translate(-50%, -50%);
+      }
+
+      .ball {
+        width: 120px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: #112326;
+        animation: popup 0.6s ease-in-out 0s both;
+      }
+      @keyframes popup {
+        from {
+          opacity: 0;
+        }
+        20%,
+        to {
+          opacity: 1;
+        }
+
+        from {
+          transform: scale(0, 0);
+        }
+        50% {
+          transform: scale(1.2, 1.25);
+        }
+        75% {
+          transform: scale(0.9, 0.95);
+        }
+        to {
+          transform: scale(1, 1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="ball"></div>
+    </div>
+  </body>
+</html>

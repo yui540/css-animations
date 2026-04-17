@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>転がるCSSアニメーション</title>
+    <style>
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #ff5088;
+        transform: translate(-50%, -50%);
+      }
+
+      .box {
+        display: grid;
+        place-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-100%, -50%);
+        width: 105px;
+        aspect-ratio: 1;
+
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          inset: 0;
+          border-radius: 20%;
+          overflow: hidden;
+          background-color: #2b213a;
+          transform-origin: right bottom;
+          animation: rolling 0.55s ease-out 0.1s both;
+        }
+      }
+      @keyframes rolling {
+        0% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(90deg);
+        }
+        50.1% {
+          transform: translateX(100%);
+        }
+        75% {
+          transform: translateX(100%) rotate(8deg);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box"></div>
+    </div>
+  </body>
+</html>

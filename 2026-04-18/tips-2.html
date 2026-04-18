@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ドミノのCSSアニメーション</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap");
+
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        display: grid;
+        place-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+      }
+
+      .domino {
+        display: grid;
+        column-gap: 20px;
+        grid-template-columns: repeat(4, auto);
+        place-content: center;
+      }
+      .domino__block {
+        position: relative;
+        width: 20px;
+        aspect-ratio: 20/60;
+        border-radius: 5px;
+        transform-origin: right bottom;
+
+        &:nth-child(1) {
+          background-color: #777;
+          animation: fall-down-1 0.65s ease-in-out 0.2s both;
+        }
+        &:nth-child(2) {
+          background-color: #bbb;
+          animation: fall-down-2 0.65s ease-in-out 0.3s both;
+        }
+        &:nth-child(3) {
+          background-color: #aaa;
+          animation: fall-down-3 0.65s ease-in-out 0.4s both;
+        }
+        &:nth-child(4) {
+          background-color: #999;
+          animation: fall-down-4 0.65s ease-in-out 0.5s both;
+        }
+      }
+      @keyframes fall-down-1 {
+        from {
+          transform: rotate(0deg);
+        }
+        60% {
+          transform: rotate(60deg);
+        }
+        80% {
+          transform: rotate(55deg);
+        }
+        to {
+          transform: rotate(60deg);
+        }
+      }
+      @keyframes fall-down-2 {
+        from {
+          transform: rotate(0deg);
+        }
+        60% {
+          transform: rotate(61deg);
+        }
+        80% {
+          transform: rotate(56deg);
+        }
+        to {
+          transform: rotate(61deg);
+        }
+      }
+      @keyframes fall-down-3 {
+        from {
+          transform: rotate(0deg);
+        }
+        60% {
+          transform: rotate(66deg);
+        }
+        80% {
+          transform: rotate(60deg);
+        }
+        to {
+          transform: rotate(66deg);
+        }
+      }
+      @keyframes fall-down-4 {
+        from {
+          transform: rotate(0deg);
+        }
+        60% {
+          transform: rotate(90deg);
+        }
+        80% {
+          transform: rotate(85deg);
+        }
+        to {
+          transform: rotate(90deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="domino">
+        <div class="domino__block"></div>
+        <div class="domino__block"></div>
+        <div class="domino__block"></div>
+        <div class="domino__block"></div>
+      </div>
+    </div>
+  </body>
+</html>

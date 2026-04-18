@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>積み木のCSSアニメーション</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        display: grid;
+        place-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+      }
+
+      .tsumiki {
+        display: grid;
+        justify-items: center;
+      }
+
+      .tsumiki__large-ball {
+        position: relative;
+        width: 65px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: linear-gradient(to top, #aaa 0 50%, #777 0);
+        animation:
+          move-large-ball-1 0.7s ease-in-out 0s both,
+          move-large-ball-2 1.2s ease-in-out 0.7s forwards;
+      }
+      @keyframes move-large-ball-1 {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translate(50%, 3%) rotate(30deg);
+        }
+      }
+      @keyframes move-large-ball-2 {
+        from {
+          transform: translate(50%, 3%) rotate(30deg);
+        }
+        50% {
+          transform: translate(-50%, 3%) rotate(-35deg);
+        }
+        75% {
+          transform: translate(10%, 1%) rotate(10deg);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      .tsumiki__bar {
+        width: 120px;
+        height: 12px;
+        border-radius: 999px;
+        background-color: #aaa;
+        animation:
+          move-bar-1 0.6s ease-in-out 0s both,
+          move-bar-2 1.2s ease-in-out 0.6s forwards;
+      }
+      @keyframes move-bar-1 {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(8%) rotate(6deg);
+        }
+      }
+      @keyframes move-bar-2 {
+        from {
+          transform: translateX(8%) rotate(6deg);
+        }
+        50% {
+          transform: translateX(-8%) rotate(-6deg);
+        }
+        75% {
+          transform: translateX(2%) rotate(2deg);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      .tsumiki__small-ball {
+        position: relative;
+        width: 35px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: linear-gradient(to top right, #aaa 0 50%, #777 0);
+        animation:
+          move-small-ball-1 0.5s ease-in-out 0s both,
+          move-small-ball-2 1.2s ease-in-out 0.5s forwards;
+      }
+      @keyframes move-small-ball-1 {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(30%) rotate(25deg);
+        }
+      }
+      @keyframes move-small-ball-2 {
+        from {
+          transform: translateX(30%) rotate(25deg);
+        }
+        50% {
+          transform: translateX(-30%) rotate(-25deg);
+        }
+        75% {
+          transform: translateX(10%) rotate(5deg);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="tsumiki">
+        <div class="tsumiki__large-ball"></div>
+        <div class="tsumiki__bar"></div>
+        <div class="tsumiki__small-ball"></div>
+      </div>
+    </div>
+  </body>
+</html>

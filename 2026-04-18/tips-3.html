@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>カランカランのCSSアニメーション</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        display: grid;
+        place-content: center;
+        overflow: hidden;
+      }
+
+      .panel {
+        position: relative;
+        animation: translate-x 0.84s ease-in-out 0s both;
+      }
+      @keyframes translate-x {
+        from {
+          transform: translateX(32%);
+        }
+        40% {
+          transform: translateX(-16%);
+        }
+        70% {
+          transform: translateX(8%);
+        }
+        to {
+          transform: translateX(0%);
+        }
+      }
+
+      .panel__inner {
+        position: relative;
+        animation: translate-y 0.84s ease-in-out 0s both;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translate(-50%, -95%);
+          width: 6%;
+          height: 200%;
+          background-color: #888;
+          border-radius: 999px;
+        }
+      }
+      @keyframes translate-y {
+        from {
+          transform: translateY(-150%);
+        }
+        40% {
+          transform: translateY(20%);
+        }
+        60% {
+          transform: translateY(0);
+        }
+        80% {
+          transform: translateY(10%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      .panel__block {
+        position: relative;
+        width: 90px;
+        aspect-ratio: 20 / 26;
+        border-radius: 12px;
+        background-color: #bbb;
+        transform-origin: 50% 10%;
+        animation: shake 0.84s ease-in-out 0s both;
+
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 8%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 15%;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          background-color: #eee;
+        }
+      }
+      @keyframes shake {
+        from {
+          transform: rotate(50deg);
+        }
+        40% {
+          transform: rotate(-16deg);
+        }
+        70% {
+          transform: rotate(8deg);
+        }
+        to {
+          transform: rotate(0deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="panel">
+        <div class="panel__inner">
+          <div class="panel__block"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

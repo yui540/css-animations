@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>幕</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .curtain {
+        position: absolute;
+        inset: 0;
+      }
+
+      .curtain__left,
+      .curtain__right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 150%;
+
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: currentColor;
+          animation:
+            close 0.7s ease-in-out var(--close-delay, 0s) both,
+            open 0.7s ease-in-out var(--open-delay, 0s) forwards;
+        }
+      }
+      .curtain__left {
+        --close-delay: 0.2s;
+        --open-delay: 1.2s;
+        color: #bbb;
+      }
+      .curtain__right {
+        --close-delay: 0.35s;
+        --open-delay: 1.2s;
+        color: #999;
+        transform: scaleX(-1);
+      }
+      @keyframes close {
+        from,
+        to {
+          transform-origin: left top;
+        }
+
+        from {
+          box-shadow: -10px -10px 16px rgba(0, 0, 0, 0);
+        }
+        50%,
+        to {
+          box-shadow: -60px -15px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        from {
+          transform: translateX(101%) rotate(-25deg);
+        }
+        to {
+          transform: translateX(0%) rotate(0deg);
+        }
+      }
+      @keyframes open {
+        from,
+        to {
+          transform-origin: right top;
+        }
+
+        from,
+        50% {
+          box-shadow: -60px -15px 16px rgba(0, 0, 0, 0.1);
+        }
+        to {
+          box-shadow: -10px -10px 16px rgba(0, 0, 0, 0);
+        }
+
+        from {
+          transform: translateX(0%) rotate(0deg);
+        }
+        to {
+          transform: translateX(-101%) rotate(25deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="curtain">
+        <div class="curtain__left"></div>
+        <div class="curtain__right"></div>
+      </div>
+    </div>
+  </body>
+</html>

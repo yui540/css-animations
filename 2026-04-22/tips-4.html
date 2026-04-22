@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>糸</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .yarns {
+        position: absolute;
+        inset: 0;
+      }
+
+      .yarns__inner {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+
+        &:nth-child(1) {
+          .yarns__yarn {
+            &:nth-child(2) {
+              --delay: 0s;
+            }
+            &:nth-child(4) {
+              --delay: 0.2s;
+            }
+            &:nth-child(1) {
+              --delay: 0.4s;
+            }
+            &:nth-child(5) {
+              --delay: 0.6s;
+            }
+            &:nth-child(3) {
+              --delay: 0.8s;
+            }
+          }
+        }
+        &:nth-child(2) {
+          transform: rotate(90deg);
+
+          .yarns__yarn {
+            &:nth-child(5) {
+              --delay: 0.1s;
+            }
+            &:nth-child(1) {
+              --delay: 0.3s;
+            }
+            &:nth-child(4) {
+              --delay: 0.5s;
+            }
+            &:nth-child(2) {
+              --delay: 0.7s;
+            }
+            &:nth-child(3) {
+              --delay: 0.9s;
+            }
+          }
+        }
+      }
+
+      .yarns__yarn {
+        background-color: #aaa;
+        animation:
+          scale-in 0.8s cubic-bezier(0, 0.56, 0.15, 1.01) var(--delay, 0s) both,
+          scale-out 0.6s cubic-bezier(0, 0.56, 0.15, 1.01)
+            calc(var(--delay, 0s) + 1.5s) forwards;
+      }
+      @keyframes scale-in {
+        from {
+          transform: scaleY(0);
+        }
+        to {
+          transform: scaleY(1);
+        }
+      }
+      @keyframes scale-out {
+        from {
+          transform: scaleY(1);
+        }
+        to {
+          transform: scaleY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="yarns">
+        <div class="yarns__inner">
+          <div class="yarns__yarn"></div>
+          <div class="yarns__yarn"></div>
+          <div class="yarns__yarn"></div>
+          <div class="yarns__yarn"></div>
+          <div class="yarns__yarn"></div>
+        </div>
+      </div>
+      <div class="yarns__inner">
+        <div class="yarns__yarn"></div>
+        <div class="yarns__yarn"></div>
+        <div class="yarns__yarn"></div>
+        <div class="yarns__yarn"></div>
+        <div class="yarns__yarn"></div>
+      </div>
+    </div>
+  </body>
+</html>

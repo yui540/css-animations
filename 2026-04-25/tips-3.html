@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>交代</title>
+    <style>
+      html {
+        background-color: #fff;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #f1f1f1;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 120px;
+        aspect-ratio: 1;
+      }
+
+      .plus,
+      .minus {
+        position: absolute;
+        inset: 0;
+        border-radius: 25%;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 45%;
+          aspect-ratio: 100/18;
+          border-radius: 999px;
+          background-color: currentColor;
+          transform: translate(-50%, -50%);
+        }
+      }
+      .plus {
+        color: #fff;
+        background-color: #999;
+        transform-origin: right bottom;
+        animation:
+          change 0.6s ease-in-out 0.2s both,
+          change 0.6s ease-in-out 1.4s reverse forwards;
+
+        &::before {
+          transform: translate(-50%, -50%) rotate(90deg);
+        }
+      }
+      .minus {
+        color: #999;
+        background-color: #fff;
+        z-index: 1;
+      }
+      @keyframes change {
+        from,
+        50% {
+          z-index: 2;
+        }
+        50.1%,
+        to {
+          z-index: 0;
+        }
+
+        from,
+        to {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(90deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="plus"></div>
+        <div class="minus"></div>
+      </div>
+    </div>
+  </body>
+</html>

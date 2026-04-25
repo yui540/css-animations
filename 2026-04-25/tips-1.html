@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>巻き物</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap");
+
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .makimono {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1.18);
+        width: fit-content;
+      }
+
+      .makimono__line {
+        position: absolute;
+        bottom: -40%;
+        left: -40%;
+        width: 180%;
+        height: 20%;
+        overflow: hidden;
+        border-radius: 999px;
+
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          inset: 0;
+          background-color: #ccc;
+          border-radius: 999px;
+          animation:
+            draw-line 1s ease-in-out 0s both,
+            draw-line 1s ease-in-out 1.7s reverse forwards;
+        }
+      }
+      @keyframes draw-line {
+        from {
+          transform: translateX(101%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      .makimono__roll {
+        position: absolute;
+        bottom: -40%;
+        right: -70%;
+        height: 160%;
+        aspect-ratio: 1;
+        background: linear-gradient(to bottom, #ccc 0 50%, #aaa 0);
+        border-radius: 999px;
+        overflow: hidden;
+        animation:
+          rotate 1s ease-in-out 0s both,
+          rotate 1s ease-in-out 1.7s reverse forwards;
+
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 40%;
+          aspect-ratio: 1;
+          border-radius: 999px;
+          background-color: #666;
+        }
+      }
+      @keyframes rotate {
+        from {
+          transform: translateX(0) rotate(180deg);
+        }
+        to {
+          transform: translateX(-420%) rotate(-180deg);
+        }
+      }
+
+      .makimono__title {
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+
+        span {
+          display: inline-block;
+          font-family: "M PLUS 1", serif;
+          font-size: 30px;
+          font-weight: 900;
+          line-height: 1.2;
+          color: #666;
+          transform-origin: bottom center;
+          animation:
+            slide-in 0.55s ease-in-out var(--start-delay, 0s) both,
+            slide-out 0.3s ease-in-out calc(var(--end-delay, 0s)) forwards;
+
+          &:nth-child(1) {
+            --start-delay: 0.65s;
+            --end-delay: 1.85s;
+          }
+          &:nth-child(2) {
+            --start-delay: 0.55s;
+            --end-delay: 1.95s;
+          }
+          &:nth-child(3) {
+            --start-delay: 0.45s;
+            --end-delay: 2.05s;
+          }
+          &:nth-child(4) {
+            --start-delay: 0.35s;
+            --end-delay: 2.15s;
+          }
+        }
+      }
+      @keyframes slide-in {
+        from {
+          transform: translateY(100%);
+        }
+        60% {
+          transform: translateY(-8%) scale(0.95, 1.15);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+      @keyframes slide-out {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(100%) scale(1.2, 0.6);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="makimono">
+        <div class="makimono__title">
+          <span>タ</span>
+          <span>イ</span>
+          <span>ト</span>
+          <span>ル</span>
+        </div>
+        <div class="makimono__line"></div>
+        <div class="makimono__roll"></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>波紋</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .ripple {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 220px;
+        aspect-ratio: 1;
+
+        &::before,
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background-color: #ccc;
+          animation: fade-in-out 1.6s ease-out both infinite;
+        }
+        &::before {
+          animation-delay: 0s;
+        }
+        &::after {
+          animation-delay: 0.4s;
+        }
+      }
+      @keyframes fade-in-out {
+        from {
+          opacity: 1;
+          transform: scale(0);
+        }
+        80%,
+        to {
+          opacity: 0;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="ripple"></div>
+    </div>
+  </body>
+</html>

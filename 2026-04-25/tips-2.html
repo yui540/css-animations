@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ガタンガタン</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .rengas {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        gap: 5px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        flex-flow: wrap-reverse;
+      }
+
+      .rengas__renga {
+        position: relative;
+        width: 90px;
+        aspect-ratio: 1 / 0.5;
+        background-color: #888;
+        border-radius: 6px;
+        transform-origin: bottom center;
+        animation:
+          bounce 0.8s ease-in-out var(--delay, 0s) both,
+          fall 0.5s cubic-bezier(0.74, 0.03, 1, 1) calc(var(--delay, 0s) + 1.4s)
+            forwards;
+
+        &:nth-child(1) {
+          --delay: 0.1s;
+        }
+        &:nth-child(2) {
+          --delay: 0.3s;
+        }
+        &:nth-child(3) {
+          --delay: 0s;
+        }
+        &:nth-child(4) {
+          --delay: 0.2s;
+        }
+        &:nth-child(5) {
+          --delay: 0.4s;
+        }
+
+        &:nth-child(2n) {
+          background-color: #aaa;
+        }
+        &:nth-child(3n) {
+          background-color: #ccc;
+        }
+      }
+      @keyframes bounce {
+        from {
+          opacity: 0;
+        }
+        20%,
+        to {
+          opacity: 1;
+        }
+
+        0% {
+          transform: translateY(-400%) rotate(30deg);
+        }
+        60% {
+          transform: rotate(-4deg);
+        }
+        70% {
+          transform: translateY(-10%) rotate(2deg);
+        }
+        80% {
+          transform: rotate(0);
+        }
+        90% {
+          transform: translateY(-5%) rotate(-1deg);
+        }
+        100% {
+          transform: rotate(0);
+        }
+      }
+      @keyframes fall {
+        from,
+        80% {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: translateY(400%) rotate(20deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="rengas">
+        <div class="rengas__renga"></div>
+        <div class="rengas__renga"></div>
+        <div class="rengas__renga"></div>
+        <div class="rengas__renga"></div>
+        <div class="rengas__renga"></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>カキカキ</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .wrapper {
+        position: absolute;
+        inset: 0;
+      }
+
+      .line {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 65%;
+      }
+      .line polyline {
+        --stroke-length: 231px;
+        --stroke-width: 11px;
+        fill: none;
+        stroke: #888;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        animation:
+          draw-line 1.2s ease-in-out 0s both,
+          clear-line 1.2s ease-in-out 1.3s forwards;
+      }
+      @keyframes draw-line {
+        from {
+          opacity: 0;
+        }
+        10%,
+        to {
+          opacity: 1;
+        }
+
+        from {
+          stroke-dasharray: 0 var(--stroke-length);
+          stroke-width: calc(var(--stroke-width) * 0.45);
+        }
+        to {
+          stroke-dasharray: var(--stroke-length) var(--stroke-length);
+          stroke-width: var(--stroke-width);
+        }
+      }
+      @keyframes clear-line {
+        from,
+        90% {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+
+        from {
+          stroke-dashoffset: 0;
+        }
+        to {
+          stroke-dashoffset: calc(var(--stroke-length) * -1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <svg class="line" viewBox="0 0 48.87 48.78">
+          <polyline
+            points="6.01 15.13 24.92 5.5 5.5 29.59 42.73 10.02 7.42 41.24 43.37 23.89 22.39 43.28 42.99 37.97"
+          />
+        </svg>
+      </div>
+    </div>
+  </body>
+</html>

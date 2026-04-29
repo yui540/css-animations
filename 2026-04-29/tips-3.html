@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>折りたたみ</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .wrapper {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        justify-content: start;
+        align-items: center;
+        padding-left: 30px;
+      }
+
+      .box {
+        --sw: 26px;
+        position: relative;
+        width: 70px;
+        aspect-ratio: 1;
+        transform-origin: left bottom;
+
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: calc(var(--sw) / 2 * -1);
+          left: calc(var(--sw) / 2 * -1);
+          width: calc(100% + var(--sw));
+          height: var(--sw);
+          background-color: #aaa;
+          border-radius: 999px;
+        }
+      }
+
+      [class^="box__line"] {
+        --offset: calc(var(--sw) / 2 * -1);
+        position: absolute;
+        inset: 0;
+
+        &::before {
+          content: "";
+          position: absolute;
+          background-color: var(--color);
+          border-radius: 999px;
+        }
+      }
+
+      .box__line-right,
+      .box__line-left {
+        &::before {
+          width: var(--sw);
+          height: calc(100% + var(--sw));
+        }
+      }
+
+      .box__line-top {
+        &::before {
+          width: calc(100% + var(--sw));
+          height: var(--sw);
+        }
+      }
+
+      .box__line-right {
+        --color: #ccc;
+        transform-origin: right bottom;
+        animation:
+          rotate 0.3s ease-in-out 0.2s both,
+          rotate 0.3s ease-in-out 2.3s reverse forwards;
+
+        &::before {
+          top: var(--offset);
+          right: var(--offset);
+        }
+      }
+
+      .box__line-top {
+        --color: #bbb;
+        transform-origin: right top;
+        animation:
+          rotate 0.3s ease-in-out 0.5s both,
+          rotate 0.3s ease-in-out 2s reverse forwards;
+
+        &::before {
+          top: var(--offset);
+          left: var(--offset);
+        }
+      }
+
+      .box__line-left {
+        --color: #999;
+        transform-origin: left top;
+        animation:
+          rotate-over 0.6s ease-in-out 0.8s both,
+          rotate 0.3s ease-in-out 1.7s reverse forwards;
+
+        &::before {
+          top: var(--offset);
+          left: var(--offset);
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(90deg);
+        }
+      }
+      @keyframes rotate-over {
+        from {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(90deg);
+        }
+        75% {
+          transform: rotate(84deg);
+        }
+        to {
+          transform: rotate(90deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="box">
+          <div class="box__line-right">
+            <div class="box__line-top">
+              <div class="box__line-left"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

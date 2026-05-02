@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>回転</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .wrapper {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-content: center;
+      }
+
+      .box {
+        position: relative;
+        width: 120px;
+        aspect-ratio: 1;
+        background-color: #e0e0e0;
+        border-radius: 50%;
+      }
+
+      .box__big {
+        box-sizing: border-box;
+        position: absolute;
+        inset: -100%;
+        border-radius: 50%;
+        border: 2px solid #e0e0e0;
+        animation: spin 6s linear 0s infinite;
+
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 20px;
+          aspect-ratio: 1;
+          background-color: #ccc;
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .box__small {
+        position: absolute;
+        inset: 5px;
+        animation: small-spin 1.6s ease-in-out 0s infinite;
+
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 40%;
+          aspect-ratio: 1;
+          background-color: #aaa;
+          border-radius: 50%;
+          transform: translate(-50%, 0);
+        }
+      }
+
+      .box__orbit {
+        position: absolute;
+        inset: 0;
+        animation: spin 3.2s linear 0s infinite;
+      }
+
+      .box__large {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 60%;
+        aspect-ratio: 1;
+        transform: translate(-50%, -100%);
+
+        &::before {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to top, #ccc 0 50%, #aaa 0);
+          border-radius: 50%;
+          animation: spin 3.2s linear 0s infinite;
+        }
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes small-spin {
+        from {
+          transform: rotate(0);
+        }
+        80%,
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="box">
+          <div class="box__big"></div>
+          <div class="box__small"></div>
+          <div class="box__orbit">
+            <div class="box__large"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

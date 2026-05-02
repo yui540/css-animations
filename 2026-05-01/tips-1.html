@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>拡大・縮小</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .wrapper {
+        position: absolute;
+        inset: 0;
+        transform: scale(1.3);
+        display: grid;
+        column-gap: 24px;
+        grid-template-columns: repeat(2, auto);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .box {
+        --size: 80px;
+        position: relative;
+        width: var(--size);
+        aspect-ratio: 1;
+        background-color: #f1f1f1;
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      .box__arrow-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 55px;
+        height: 55px;
+      }
+
+      .arrow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 6px;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      .arrow--expand {
+        height: 100%;
+        background-color: #888;
+        border-radius: 16px;
+        animation: arrow-up 0.8s ease-in-out 0.2s both;
+      }
+
+      .arrow--compress {
+        height: 110%;
+      }
+
+      @keyframes arrow-up {
+        from,
+        to {
+          height: 100%;
+        }
+        50% {
+          height: 140%;
+        }
+        75% {
+          height: 90%;
+        }
+      }
+
+      .arrow__sharp {
+        position: absolute;
+        inset: 0;
+
+        &::before,
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 16px;
+          background-color: #888;
+          border-radius: 16px;
+        }
+      }
+
+      .arrow__sharp--top {
+        &::before,
+        &::after {
+          top: 0;
+          transform-origin: top center;
+        }
+        &::before {
+          transform: rotate(-45deg) translateX(-30%);
+        }
+        &::after {
+          transform: rotate(45deg) translateX(30%);
+        }
+      }
+
+      .arrow__sharp--bottom {
+        &::before,
+        &::after {
+          bottom: 0;
+          transform-origin: bottom center;
+        }
+        &::before {
+          transform: rotate(-45deg) translateX(30%);
+        }
+        &::after {
+          transform: rotate(45deg) translateX(-30%);
+        }
+      }
+
+      .arrow__bar {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background-color: #888;
+        border-radius: 16px;
+        animation: arrow-down 0.8s ease-in-out 0.2s both;
+
+        &::before,
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 16px;
+          background-color: #888;
+          border-radius: 16px;
+        }
+      }
+
+      .arrow__bar--top {
+        top: 0;
+
+        &::before,
+        &::after {
+          bottom: 0;
+          transform-origin: bottom center;
+        }
+        &::before {
+          transform: rotate(45deg) translateX(-30%);
+        }
+        &::after {
+          transform: rotate(-45deg) translateX(30%);
+        }
+      }
+
+      .arrow__bar--bottom {
+        bottom: 0;
+
+        &::before,
+        &::after {
+          top: 0;
+          transform-origin: top center;
+        }
+        &::before {
+          transform: rotate(-45deg) translateX(-30%);
+        }
+        &::after {
+          transform: rotate(45deg) translateX(30%);
+        }
+      }
+
+      @keyframes arrow-down {
+        from,
+        to {
+          height: 40%;
+        }
+        50% {
+          height: 55%;
+        }
+        75% {
+          height: 38%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="box">
+          <div class="box__arrow-wrapper">
+            <div class="arrow arrow--expand">
+              <div class="arrow__sharp arrow__sharp--top"></div>
+              <div class="arrow__sharp arrow__sharp--bottom"></div>
+            </div>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box__arrow-wrapper">
+            <div class="arrow arrow--compress">
+              <div class="arrow__bar arrow__bar--top"></div>
+              <div class="arrow__bar arrow__bar--bottom"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

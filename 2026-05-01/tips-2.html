@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>潜る</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .wrapper {
+        position: absolute;
+        inset: 0;
+        transform: scale(2);
+      }
+
+      .bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 16px;
+        height: 80px;
+        transform: translate(-50%, -60%);
+
+        &::after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: #888;
+          border-radius: 999px;
+          transform-origin: center 8px;
+          animation:
+            bar-rotate-1 0.6s ease-in-out 0.42s both,
+            bar-rotate-2 0.8s ease-in-out 1.02s forwards,
+            bar-rotate-3 0.6s ease-in-out 2.22s forwards,
+            bar-rotate-4 0.8s ease-in-out 2.82s forwards;
+        }
+      }
+
+      @keyframes bar-rotate-1 {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(58deg);
+        }
+      }
+      @keyframes bar-rotate-2 {
+        from {
+          transform: rotate(58deg);
+        }
+        50% {
+          transform: rotate(-8deg);
+        }
+        75% {
+          transform: rotate(4deg);
+        }
+        to {
+          transform: rotate(0deg);
+        }
+      }
+      @keyframes bar-rotate-3 {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(-58deg);
+        }
+      }
+      @keyframes bar-rotate-4 {
+        from {
+          transform: rotate(-58deg);
+        }
+        50% {
+          transform: rotate(8deg);
+        }
+        75% {
+          transform: rotate(-4deg);
+        }
+        to {
+          transform: rotate(0deg);
+        }
+      }
+
+      .ball {
+        position: absolute;
+        top: 58%;
+        left: 50%;
+        width: 45px;
+        height: 40px;
+        transform: translate(30%, -50%);
+        animation:
+          ball-move 1s ease-in-out 0.2s both,
+          ball-move 1s ease-in-out 2s reverse forwards;
+
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 100%;
+          height: 100%;
+          background-color: #aaa;
+          border-radius: 999px;
+          transform: translateX(-50%);
+          animation:
+            ball-squash 0.8s ease-in-out 0.9s both,
+            ball-squash 0.8s ease-in-out 2.7s forwards;
+        }
+      }
+
+      @keyframes ball-move {
+        from {
+          transform: translate(50%, -50%);
+        }
+        to {
+          transform: translate(-150%, -50%);
+        }
+      }
+
+      @keyframes ball-squash {
+        from,
+        to {
+          width: 100%;
+          height: 100%;
+        }
+        50% {
+          width: 120%;
+          height: 45%;
+        }
+        75% {
+          width: 90%;
+          height: 120%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="ball"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </body>
+</html>

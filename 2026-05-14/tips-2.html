@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>カーテン</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .wrapper {
+        position: absolute;
+        inset: 0;
+        transform: scale(1.4);
+        display: grid;
+        place-content: center;
+      }
+
+      .clothes {
+        position: absolute;
+        inset: 0;
+      }
+
+      .line {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 90%;
+
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          inset: 0;
+          background-color: #bbb;
+          animation: line-anim 3s ease-in-out 0s infinite both;
+        }
+      }
+
+      @keyframes line-anim {
+        0%,
+        6.67% {
+          transform: translateY(0);
+        }
+        33.33%,
+        53.33% {
+          transform: translateY(-200px);
+        }
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      .cloth {
+        position: absolute;
+        top: 0;
+        width: calc(50% - 3px);
+        height: 100%;
+
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          inset: 0;
+          background-color: #aaa;
+          animation: cloth-anim 3s ease-in-out 0s infinite both;
+        }
+      }
+
+      .cloth--left {
+        left: 0;
+      }
+
+      .cloth--right {
+        right: 0;
+        transform: scaleX(-1);
+      }
+
+      @keyframes cloth-anim {
+        0%,
+        6.67% {
+          border-radius: 0 0 0 0;
+        }
+        40%,
+        53.33% {
+          border-radius: 0 0 85% 0;
+        }
+        86.67%,
+        100% {
+          border-radius: 0 0 0 0;
+        }
+      }
+
+      .zipper-wrapper {
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -80%);
+        width: 24px;
+        height: 32px;
+        background-color: #ccc;
+        border-radius: 8px;
+        border: 5px solid #888;
+        animation: zipper-up 3s ease-in-out 0s infinite both;
+      }
+
+      @keyframes zipper-up {
+        0%,
+        6.67% {
+          bottom: 0;
+        }
+        33.33%,
+        53.33% {
+          bottom: 200px;
+        }
+        80%,
+        100% {
+          bottom: 0;
+        }
+      }
+
+      .zipper {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform-origin: center 9px;
+        transform: translate(-50%, 70%);
+        width: 24px;
+        height: 50px;
+        background-color: #666;
+        border-radius: 999px;
+        animation: zipper-sway 3s ease-in-out infinite;
+
+        &::before,
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          transform: translateX(-50%);
+          left: 50%;
+          aspect-ratio: 1;
+          border-radius: 999px;
+          background-color: #ccc;
+        }
+        &::before {
+          top: 4px;
+          width: 10px;
+        }
+        &::after {
+          bottom: 4px;
+          width: 16px;
+        }
+      }
+
+      @keyframes zipper-sway {
+        0%,
+        30% {
+          transform: translate(-50%, 70%);
+        }
+        35% {
+          transform: translate(-50%, 70%) rotate(8deg);
+        }
+        41.67% {
+          transform: translate(-50%, 70%) rotate(-8deg);
+        }
+        46.67%,
+        73.33% {
+          transform: translate(-50%, 70%);
+        }
+        78.33% {
+          transform: translate(-50%, 70%) rotate(8deg);
+        }
+        85% {
+          transform: translate(-50%, 70%) rotate(-8deg);
+        }
+        90%,
+        100% {
+          transform: translate(-50%, 70%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="clothes">
+          <div class="line"></div>
+          <div class="cloth cloth--left"></div>
+          <div class="cloth cloth--right"></div>
+          <div class="zipper-wrapper">
+            <div class="zipper"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

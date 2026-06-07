@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>いいねアニメーション3</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .wrapper {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        transform: scale(3.4);
+      }
+
+      .heart {
+        --size: 24px;
+        position: relative;
+        width: var(--size);
+        height: var(--size);
+      }
+
+      .heart__stroke {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      @keyframes popup {
+        0% {
+          transform: scale(0);
+        }
+        40% {
+          transform: scale(1.6);
+        }
+        60% {
+          transform: scale(1.04);
+        }
+        80% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1.04);
+        }
+      }
+
+      .heart__fill {
+        position: absolute;
+        top: 5.3%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        animation: popup 0.7s ease-in-out 0.2s both;
+      }
+
+      .cross {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .cross__bar {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 50%;
+        transform-origin: bottom center;
+      }
+
+      .cross__bar:nth-child(1) {
+        transform: translateX(-50%);
+      }
+      .cross__bar:nth-child(2) {
+        transform: translateX(-50%) rotate(90deg);
+      }
+      .cross__bar:nth-child(3) {
+        transform: translateX(-50%) rotate(180deg);
+      }
+      .cross__bar:nth-child(4) {
+        transform: translateX(-50%) rotate(270deg);
+      }
+
+      .cross--line {
+        width: 160%;
+        height: 160%;
+      }
+
+      .cross--line .cross__bar {
+        width: 1px;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .cross--line .cross__bar::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 999px;
+        background-color: currentColor;
+        animation: cross-line-slide 0.45s cubic-bezier(0.75, 0.02, 0.15, 1)
+          var(--delay, 0s) both;
+      }
+
+      @keyframes cross-line-slide {
+        from {
+          transform: translateY(-101%);
+        }
+        to {
+          transform: translateY(101%);
+        }
+      }
+
+      .cross--seg {
+        width: 220%;
+        height: 220%;
+      }
+
+      .cross--seg .cross__bar {
+        width: 2.5px;
+      }
+
+      .cross__seg {
+        display: block;
+        width: 100%;
+        height: 40%;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .cross__seg::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 999px;
+        background-color: currentColor;
+        animation: cross-seg-slide 1s cubic-bezier(0.75, 0.02, 0.15, 1)
+          var(--delay, 0s) both;
+      }
+
+      @keyframes cross-seg-slide {
+        from {
+          transform: translateY(101%);
+        }
+        to {
+          transform: translateY(-101%);
+        }
+      }
+
+      .cross--0 {
+        --delay: 0s;
+        color: #fe587a;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+      .cross--1 {
+        --delay: 0.3s;
+        color: #f9dc65;
+        width: 150%;
+        height: 150%;
+        transform: translate(-50%, -50%);
+      }
+      .cross--2 {
+        --delay: 0.4s;
+        color: #f9dc65;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="heart">
+          <img class="heart__stroke" src="./heart-s.svg" alt="" />
+
+          <img class="heart__fill" src="./heart-f.svg" alt="" />
+
+          <div class="cross cross--line cross--0">
+            <div class="cross__bar"></div>
+            <div class="cross__bar"></div>
+            <div class="cross__bar"></div>
+            <div class="cross__bar"></div>
+          </div>
+
+          <div class="cross cross--seg cross--1">
+            <div class="cross__bar"><span class="cross__seg"></span></div>
+            <div class="cross__bar"><span class="cross__seg"></span></div>
+            <div class="cross__bar"><span class="cross__seg"></span></div>
+            <div class="cross__bar"><span class="cross__seg"></span></div>
+          </div>
+
+          <div class="cross cross--seg cross--2">
+            <div class="cross__bar"><span class="cross__seg"></span></div>
+            <div class="cross__bar"><span class="cross__seg"></span></div>
+            <div class="cross__bar"><span class="cross__seg"></span></div>
+            <div class="cross__bar"><span class="cross__seg"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

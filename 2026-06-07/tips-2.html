@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>いいねアニメーション2</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .wrapper {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        transform: scale(3.4);
+      }
+
+      .heart {
+        --size: 24px;
+        position: relative;
+        width: var(--size);
+        height: var(--size);
+      }
+
+      .stroke {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .deco {
+        position: absolute;
+        top: 15%;
+        left: 15%;
+        width: 70%;
+        height: 70%;
+        opacity: 0.2;
+      }
+
+      .deco img {
+        display: block;
+        width: 100%;
+      }
+
+      @keyframes fly {
+        from,
+        to {
+          opacity: 0;
+        }
+        30%,
+        70% {
+          opacity: 0.2;
+        }
+
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-200%);
+        }
+      }
+
+      @keyframes move {
+        to {
+          transform: translate(var(--x), var(--y)) rotate(var(--r));
+        }
+      }
+
+      .deco--1 {
+        animation: fly 0.8s cubic-bezier(0.64, 0.08, 1, 0.97) 0.9s both;
+      }
+      .deco--1 img {
+        --x: -100%;
+        --y: 60%;
+        --r: -10deg;
+        animation: move 0.8s cubic-bezier(0, 0.31, 0.18, 0.99) 0.9s both;
+      }
+
+      .deco--2 {
+        animation: fly 0.8s cubic-bezier(0.64, 0.08, 1, 0.97) 0.4s both;
+      }
+      .deco--2 img {
+        --x: -150%;
+        --y: 60%;
+        --r: -20deg;
+        animation: move 0.8s cubic-bezier(0, 0.31, 0.18, 0.99) 0.4s both;
+      }
+
+      .deco--3 {
+        animation: fly 0.8s cubic-bezier(0.64, 0.08, 1, 0.97) 0.75s both;
+      }
+      .deco--3 img {
+        --x: 80%;
+        --y: 60%;
+        --r: 10deg;
+        animation: move 0.8s cubic-bezier(0, 0.31, 0.18, 0.99) 0.75s both;
+      }
+
+      .deco--4 {
+        animation: fly 0.8s cubic-bezier(0.64, 0.08, 1, 0.97) 0.5s both;
+      }
+      .deco--4 img {
+        --x: 120%;
+        --y: 60%;
+        --r: 20deg;
+        animation: move 0.8s cubic-bezier(0, 0.31, 0.18, 0.99) 0.5s both;
+      }
+
+      .deco--5 {
+        animation: fly 0.8s cubic-bezier(0.64, 0.08, 1, 0.97) 1.1s both;
+      }
+      .deco--5 img {
+        --x: -10%;
+        --y: 20%;
+        --r: -4deg;
+        animation: move 0.8s cubic-bezier(0, 0.31, 0.18, 0.99) 1.1s both;
+      }
+
+      @keyframes scale {
+        from,
+        to {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+
+        from {
+          transform: translateY(4%) scale(1);
+        }
+        to {
+          transform: translateY(4%) scale(1.8);
+        }
+      }
+
+      .pulse {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transform-box: fill-box;
+        transform-origin: center;
+        overflow: visible;
+        animation: scale 1s cubic-bezier(0.71, 0, 0.23, 0.99) 0.2s both;
+      }
+
+      .pulse path {
+        fill: none;
+        stroke-width: 0.1px;
+        stroke: #fe587a;
+      }
+
+      @keyframes popup {
+        0% {
+          transform: scale(0);
+        }
+        40% {
+          transform: scale(1.6);
+        }
+        60% {
+          transform: scale(1.04);
+        }
+        80% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1.04);
+        }
+      }
+
+      .fill {
+        position: absolute;
+        top: 5.3%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        animation: popup 0.7s ease-in-out 0.15s both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="heart">
+          <img class="stroke" src="./heart-s.svg" alt="" />
+          <div class="deco deco--1"><img src="./heart-f.svg" alt="" /></div>
+          <div class="deco deco--2"><img src="./heart-f.svg" alt="" /></div>
+          <div class="deco deco--3"><img src="./heart-f.svg" alt="" /></div>
+          <div class="deco deco--4"><img src="./heart-f.svg" alt="" /></div>
+          <div class="deco deco--5"><img src="./heart-f.svg" alt="" /></div>
+          <svg class="pulse" viewBox="0 0 24 25">
+            <path
+              d="M16.2857 3.2998C14.5714 3.2998 13.0476 4.05958 12 5.29422C10.9524 4.05958 9.33333 3.2998 7.61905 3.2998C4.57143 3.2998 2 5.86405 2 8.90316C2 9.0931 2 9.28304 2 9.47299C2.38095 14.1266 7.33333 18.0205 10.2857 19.8249C10.7619 20.1099 11.3333 20.2998 12 20.2998C12.5714 20.2998 13.1429 20.1099 13.7143 19.8249C16.6667 17.9255 21.619 14.1266 22 9.47299C22 9.28304 22 9.0931 22 8.90316C22 5.86405 19.4286 3.2998 16.2857 3.2998Z"
+            />
+          </svg>
+          <img class="fill" src="./heart-f.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

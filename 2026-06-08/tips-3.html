@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ブックマーク3</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .box {
+        --bg: #f9f9f9;
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 110px;
+        aspect-ratio: 1;
+        background-color: var(--bg);
+        border-radius: 20%;
+        overflow: hidden;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(101%);
+        }
+        to {
+          transform: translateX(0%);
+        }
+      }
+
+      @keyframes slideOut {
+        from {
+          transform: translateX(0%);
+        }
+        to {
+          transform: translateX(-101%);
+        }
+      }
+
+      .bg {
+        position: absolute;
+        inset: 0;
+        background-color: #fbe5ee;
+        animation:
+          slideIn 0.6s ease-in-out 0.4s both,
+          slideOut 0.6s ease-in-out 2.6s forwards;
+      }
+
+      @keyframes leftOut {
+        from {
+          left: 50%;
+        }
+        to {
+          left: -50%;
+        }
+      }
+
+      @keyframes leftIn {
+        from {
+          left: 150%;
+        }
+        to {
+          left: 50%;
+        }
+      }
+
+      .marks {
+        --s: 78px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        width: var(--s);
+        height: var(--s);
+      }
+
+      .marks--1 {
+        animation: leftOut 0.6s ease-in-out 0.3s both;
+      }
+      .marks--2 {
+        animation:
+          leftIn 0.6s ease-in-out 0.4s both,
+          leftOut 0.6s ease-in-out 2.5s forwards;
+      }
+      .marks--3 {
+        animation: leftIn 0.6s ease-in-out 2.6s both;
+      }
+
+      .mark {
+        position: absolute;
+        top: 0;
+        left: 17.5%;
+        width: 65%;
+        height: 100%;
+        background-color: var(--c);
+        clip-path: polygon(0 -100%, 100% -100%, 100% 100%, 50% 80%, 0 100%);
+        transform-origin: top center;
+      }
+
+      @keyframes jump {
+        0% {
+          transform: scale(1);
+        }
+        30% {
+          transform: scale(1.2, 0.6);
+        }
+        70% {
+          transform: scale(0.8, 1.4);
+        }
+        100% {
+          transform: scale(1, 1);
+        }
+      }
+
+      @keyframes j {
+        0%,
+        100% {
+          translate: 0 0;
+        }
+        50% {
+          translate: 0 65%;
+        }
+      }
+
+      @keyframes bounce {
+        0% {
+          scale: 1;
+        }
+        33% {
+          scale: 1.2 0.7;
+        }
+        66% {
+          scale: 1 1.1;
+        }
+        100% {
+          scale: 1 1;
+        }
+      }
+
+      .mark--1 {
+        --c: #999;
+        animation:
+          jump 0.7s ease-in-out 0s both,
+          j 0.5s ease-in-out 0.3s forwards;
+      }
+
+      .mark--2 {
+        --c: #e6508b;
+        animation:
+          j 0.5s ease-in-out 0.4s both,
+          bounce 0.8s ease-in-out 0.7s both,
+          jump 0.7s ease-in-out 2.2s forwards,
+          j 0.5s ease-in-out 2.5s forwards;
+      }
+
+      .mark--3 {
+        --c: #999;
+        animation:
+          j 0.5s ease-in-out 2.6s both,
+          bounce 0.8s ease-in-out 2.9s both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="scene">
+          <div class="bg"></div>
+
+          <div class="marks marks--1">
+            <div class="mark mark--1"></div>
+          </div>
+          <div class="marks marks--2">
+            <div class="mark mark--2"></div>
+          </div>
+          <div class="marks marks--3">
+            <div class="mark mark--3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

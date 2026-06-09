@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>動く猫ちゃん2</title>
+    <style>
+      html {
+        background-color: #e0e0e0;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 320px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+
+      .box {
+        --bg: #f9f9f9;
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 264px;
+        aspect-ratio: 264/211;
+        background-color: var(--bg);
+        border-radius: 40px;
+        overflow: hidden;
+      }
+
+      .flower {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 105px;
+        aspect-ratio: 105 / 164;
+        transform-origin: bottom left;
+        transform: translate(-110%, -50%) scale(0.95);
+      }
+
+      .flower__stem {
+        position: absolute;
+        bottom: 0;
+        left: 47.65%;
+        width: 4.7%;
+        height: 65.8%;
+        border-radius: 999px;
+      }
+
+      .flower__stem::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #aaa;
+        border-radius: 999px;
+        animation:
+          stem-grow 0.4s ease-in-out 0s both,
+          stem-extend 0.3s ease-in-out 1.6s forwards,
+          stem-retract 0.6s ease-in-out 3.2s forwards;
+      }
+      @keyframes stem-grow {
+        from {
+          height: 0;
+        }
+        to {
+          height: 37%;
+        }
+      }
+      @keyframes stem-extend {
+        from {
+          height: 37%;
+        }
+        to {
+          height: 100%;
+        }
+      }
+      @keyframes stem-retract {
+        from {
+          height: 100%;
+        }
+        to {
+          height: 0%;
+        }
+      }
+
+      .flower__leaf {
+        display: block;
+        position: absolute;
+        bottom: 17.6%;
+        width: 48.5%;
+      }
+
+      .flower__leaf--1 {
+        left: 2%;
+        transform-origin: 100% 87%;
+        animation:
+          leaf-pop-1 0.8s ease-in-out 0.4s both,
+          leaf-hide-1 0.3s ease-in-out 3.3s forwards;
+      }
+      @keyframes leaf-pop-1 {
+        from {
+          transform: scale(0) rotate(-50deg) skewX(-10deg);
+        }
+        50% {
+          transform: scale(1.1) rotate(10deg) skewX(4deg);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+      @keyframes leaf-hide-1 {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(0) rotate(-50deg) skewX(-10deg);
+        }
+      }
+
+      .flower__leaf--2 {
+        right: 2%;
+        transform-origin: 0% 87%;
+        animation:
+          leaf-pop-2 0.8s ease-in-out 0.3s both,
+          leaf-hide-2 0.3s ease-in-out 3.2s forwards;
+      }
+      @keyframes leaf-pop-2 {
+        from {
+          transform: scale(0) rotate(80deg) skewX(-5deg);
+        }
+        50% {
+          transform: scale(1.05) rotate(5deg) skewX(2deg);
+        }
+        to {
+          transform: scale(0.95) rotate(20deg);
+        }
+      }
+      @keyframes leaf-hide-2 {
+        from {
+          transform: scale(0.95) rotate(20deg);
+        }
+        to {
+          transform: scale(0) rotate(80deg) skewX(-5deg);
+        }
+      }
+
+      .flower__bloom {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 10%;
+        width: 80%;
+        animation:
+          bloom-pop 0.7s ease-in-out 1.85s both,
+          bloom-hide 0.4s ease-in-out 3s forwards;
+      }
+      @keyframes bloom-pop {
+        from {
+          transform: scale(0) rotate(-30deg);
+        }
+        50% {
+          transform: scale(1.1) rotate(5deg);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+      @keyframes bloom-hide {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(0) rotate(-30deg);
+        }
+      }
+
+      .flower__seed {
+        position: absolute;
+        top: 21%;
+        left: 39%;
+        width: 22.8%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: #aaa;
+        animation:
+          seed-pop 0.7s ease-in-out 1.95s both,
+          seed-hide 0.4s ease-in-out 3s forwards;
+      }
+      @keyframes seed-pop {
+        from {
+          transform: scale(0);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+      @keyframes seed-hide {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(0);
+        }
+      }
+
+      .cat {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(0%, -10%);
+        width: 120px;
+        overflow: visible;
+      }
+
+      .cat__inner {
+        transform-origin: center bottom;
+        animation: breathe 1.075s ease-in-out 0s infinite;
+      }
+      @keyframes breathe {
+        from,
+        to {
+          transform: scale(1, 1);
+        }
+        50% {
+          transform: scale(1.03, 1.01) skewX(-1deg);
+        }
+      }
+
+      .cat__tail {
+        fill: none;
+        stroke: #aaaaaa;
+        stroke-width: 10px;
+        stroke-linecap: round;
+        transform-origin: 108px 97px;
+        animation: tail-wag 0.4s ease-in-out 3s 2 both;
+      }
+      @keyframes tail-wag {
+        from,
+        to {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(-15deg);
+        }
+      }
+
+      .cat__ears {
+        transform: translateY(3px);
+        animation:
+          ears-settle 0.7s ease-in-out 0.2s both,
+          ears-tilt 0.7s ease-in-out 1.7s forwards,
+          ears-reset 0.7s ease-in-out 3.4s forwards;
+      }
+      @keyframes ears-settle {
+        from {
+          transform: rotate(-10deg) translate(-15px, 18px) scale(1, 1.1);
+        }
+        to {
+          transform: translate(0px, 3px);
+        }
+      }
+      @keyframes ears-tilt {
+        from {
+          transform: translate(0px, 3px);
+        }
+        to {
+          transform: rotate(7deg) translate(14px, -5px) scale(1, 1.1);
+        }
+      }
+      @keyframes ears-reset {
+        from {
+          transform: rotate(7deg) translate(14px, -5px) scale(1, 1.1);
+        }
+        to {
+          transform: rotate(-10deg) translate(-15px, 18px) scale(1, 1.1);
+        }
+      }
+
+      .cat__ear {
+        fill: #f1f1f1;
+        stroke: #aaaaaa;
+        stroke-width: 8px;
+      }
+
+      .cat__ear:nth-child(1) {
+        transform-origin: 65px 20px;
+        animation: ear-left 0.4s ease-in-out 0.8s 2 both;
+      }
+      @keyframes ear-left {
+        from,
+        to {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(-5deg) scale(1.18);
+        }
+      }
+
+      .cat__ear:nth-child(2) {
+        transform-origin: 74px 20px;
+        animation: ear-right 0.4s ease-in-out 0.8s 2 both;
+      }
+      @keyframes ear-right {
+        from,
+        to {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(10deg) scale(1.18);
+        }
+      }
+
+      .cat__body {
+        fill: #aaaaaa;
+        transform-origin: center bottom;
+        animation:
+          body-settle 0.7s ease-in-out 0.2s both,
+          body-stretch 0.7s ease-in-out 1.7s forwards,
+          body-reset 0.7s ease-in-out 3.4s forwards;
+      }
+      @keyframes body-settle {
+        from {
+          transform: scale(1.04, 0.9);
+        }
+        to {
+          transform: scale(1, 1);
+        }
+      }
+      @keyframes body-stretch {
+        from {
+          transform: scale(1, 1);
+        }
+        to {
+          transform: scale(0.94, 1.1);
+        }
+      }
+      @keyframes body-reset {
+        from {
+          transform: scale(0.94, 1.1);
+        }
+        to {
+          transform: scale(1.04, 0.9);
+        }
+      }
+
+      .cat__eye {
+        fill: #f5f5f5;
+        animation:
+          eye-settle 0.7s ease-in-out 0.2s both,
+          eye-squint 0.7s ease-in-out 1.7s forwards,
+          eye-reset 0.7s ease-in-out 3.4s forwards;
+      }
+      @keyframes eye-settle {
+        from {
+          transform: translate(-10px, 20px) scaleY(0.9);
+        }
+        to {
+          transform: translate(0, 0);
+        }
+      }
+      @keyframes eye-squint {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(-2px, -8px) scaleY(0.8);
+        }
+      }
+      @keyframes eye-reset {
+        from {
+          transform: translate(-2px, -8px) scaleY(0.8);
+        }
+        to {
+          transform: translate(-10px, 20px) scaleY(0.9);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="scene">
+        <div class="box">
+          <div class="flower">
+            <div class="flower__stem"></div>
+            <img
+              class="flower__leaf flower__leaf--1"
+              src="./leaf1.png"
+              alt=""
+            />
+            <img
+              class="flower__leaf flower__leaf--2"
+              src="./leaf2.png"
+              alt=""
+            />
+            <img class="flower__bloom" src="./hana.png" alt="" />
+            <div class="flower__seed"></div>
+          </div>
+
+          <svg class="cat" viewBox="0 0 148 115">
+            <g class="cat__inner">
+              <path
+                class="cat__tail"
+                d="M114.085 101.509C126.144 106.365 136.457 103.51 142.414 96.7459"
+              />
+              <g class="cat__ears">
+                <path
+                  class="cat__ear"
+                  d="M40.4319 6.09395C41.702 6.13103 43.8288 7.06505 46.7137 9.4725C49.4451 11.7519 52.2728 14.8543 54.8755 18.0786C57.1922 20.9487 59.2586 23.8248 60.8374 26.132L30.945 32.6769C31.4339 29.3893 32.1857 25.072 33.2486 20.7955C34.3353 16.4236 35.686 12.3521 37.2759 9.4793C39.0367 6.29792 40.2119 6.08756 40.4319 6.09395Z"
+                />
+                <path
+                  class="cat__ear"
+                  d="M98.6758 10.4927C99.8265 10.1389 100.473 10.1407 100.745 10.186C100.805 10.2161 101.09 10.3782 101.56 10.9946C102.189 11.8213 102.873 13.1132 103.559 14.896C104.924 18.4471 106.008 23.1915 106.839 28.0962C107.621 32.7162 108.149 37.3061 108.489 40.8638L76.0713 26.8882C78.2945 24.7999 81.1965 22.1764 84.3271 19.6128C87.7416 16.8168 91.3179 14.1834 94.5166 12.3823C96.1157 11.4819 97.5156 10.8494 98.6758 10.4927Z"
+                />
+              </g>
+              <path
+                class="cat__body"
+                d="M124.824 76.3795C124.824 108.128 96.8814 114.128 62.4121 114.128C27.9429 114.128 0 105.122 9.2011e-08 76.3795C9.2011e-08 47.6368 27.9429 24.3362 62.4121 24.3362C96.8814 24.3362 124.824 47.6368 124.824 76.3795Z"
+              />
+              <rect
+                class="cat__eye"
+                x="35"
+                y="48.1279"
+                width="11"
+                height="19"
+                rx="5.5"
+              />
+              <rect
+                class="cat__eye"
+                x="67"
+                y="48.1279"
+                width="11"
+                height="19"
+                rx="5.5"
+              />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
